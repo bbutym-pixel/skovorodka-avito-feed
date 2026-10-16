@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: skovorodka-avito-feed
+    runtime: docker
+    plan: starter
+    healthCheckPath: /health
+    envVars:
+      - key: DATA_FILE
+        value: /var/data/ads.json
+      - key: FEED_TOKEN
+        generateValue: true
+      - key: ADMIN_TOKEN
+        generateValue: true
+      - key: AVITO_CLIENT_ID
+        sync: false
+      - key: AVITO_CLIENT_SECRET
+        sync: false
+      - key: AVITO_USER_ID
+        value: ""
+    disk:
+      name: avito-data
+      mountPath: /var/data
+      sizeGB: 1
